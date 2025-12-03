@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900');
+
+
+:root {
+  --black: #202325;
+  --bg: #F6F6F6;
+  --white: #fff;
+
+  --accent-blue: #0084FF;
+  --accent-orange: #FF6A20;
+  --accent-blue-gradient: linear-gradient(100deg, #3496FF, #2078D6);
+  --accent-orange-gradient: linear-gradient(100deg, #FAF0DE, #DEC29F);
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  background-color: #F6F6F6;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 p, li, button, a, input, span {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: var(--black);
+  text-decoration: none;
+  outline: none;
+}
+
+input {
+  background-color: #fff;
+  box-shadow: 0px 0px 12px 4px rgba(0,0,0,.0775);
+}
+
+input:focus {
+  outline: 1.5px solid #ccd1d4;
+}
