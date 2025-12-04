@@ -38,7 +38,21 @@ body {
   position: relative;
 }
 
-h1, h2, h3, h4, h5, h6 p, li, button, a, input, span {
+#root {
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 p,
+li,
+button,
+a,
+input,
+span {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
@@ -49,9 +63,62 @@ h1, h2, h3, h4, h5, h6 p, li, button, a, input, span {
 
 input {
   background-color: #fff;
-  box-shadow: 0px 0px 12px 4px rgba(0,0,0,.0775);
+  box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, .0775);
 }
 
 input:focus {
   outline: 1.5px solid #ccd1d4;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  width: 100%;
+  background-color: #fff;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px -12px rgba(90, 95, 99, 0.125);
+}
+
+.btn {
+  padding: .5rem 1rem;
+}
+
+.btn-light {
+  padding: .5rem 1rem;
+  border-radius: 3rem;
+  border: 3px solid var(--accent-orange);
+  background-color: transparent;
+  transition: .125s;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.btn-light:hover {
+  background-color: var(--accent-orange);
+}
+
+.btn-ghost {}
+
+
+/* ICON STYLING */
+.icon-red {
+  background-color: #ff7268;
+}
+
+.icon-blue {
+  background-color: #6cb8ff;
+}
+
+.icon-purple {
+  background-color: #bb7fff;
+}
+
+.icon-green {
+  background-color: #55e691;
+}
+
+.icon-orange {
+  background-color: #eba24f;
 }

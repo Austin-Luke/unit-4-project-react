@@ -1,0 +1,24 @@
+.card-header {
+  display: flex;
+  flex-direction: row;
+  gap: .75rem;
+  align-items: center;
+}
+
+.card-header h5 {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.card-header h5 .dark {
+  color: var(--black);
+}
+
+.card-header h5 .light{
+  color: var(--white); 
+  
+}
+
+.icon-card-header {
+  height: 1.5rem;
+}
