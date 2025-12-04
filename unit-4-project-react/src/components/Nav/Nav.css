@@ -32,7 +32,6 @@ nav button {
 
 .active p {
   color: var(--accent-blue);
-  font-weight: 800;
   text-align: center;
 }
 
