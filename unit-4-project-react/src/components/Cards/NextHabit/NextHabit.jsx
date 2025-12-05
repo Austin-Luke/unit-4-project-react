@@ -4,11 +4,11 @@ import CardHeader from "../../CardHeader/CardHeader";
 import Icon from "../../Icon/Icon";
 import { useEffect, useState } from "react";
 
-const NextHabit = () => {
+const NextHabit = ({task}) => {
 
   const [lastComplete, setLastComplete] = useState(-1)
 
-  const task = {
+  const thisTask = {
     taskName: "Reading",
     description: "A short description",
     category: 4,
@@ -51,7 +51,7 @@ const NextHabit = () => {
         </div>
 
         <div className="next-habit-content">
-          <h3>{task.taskName}</h3>
+          <h3>{task.name}</h3>
           <div>
             <p>{task.description}</p>
             <p>Last Updated: {lastComplete >= 0 ? `${lastComplete} days ago` : "Never"} </p>
