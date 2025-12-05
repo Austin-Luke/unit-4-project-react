@@ -4,6 +4,7 @@ import Nav from "./components/Nav/Nav";
 import Home from "./components/Home/Home";
 
 import * as HabitService from "./services/HabitService"
+import Habits from "./components/Habits/Habits";
 
 
 const taskSkeleton = {
@@ -42,6 +43,7 @@ const App = () => {
     <>
       <main>
         {page == "home" && <Home tasks={tasks} />} {/* Home page when page = home */}
+        {page == "habits" && <Habits tasks={tasks} />} {/* Home page when page = home */}
       </main>
       <Nav page={page} handlePageChange={handlePageChange}/>
     </>
