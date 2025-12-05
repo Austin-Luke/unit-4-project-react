@@ -3,37 +3,7 @@ import Icon from "../../Icon/Icon"
 
 import "./DailyRoutine.css"
 
-const DailyRoutine = () => {
-
-  const tasks = [
-    {
-      taskName: "Reading",
-      description: "A short description",
-      category: 4,
-      completions: [
-        { day: 13, completion: false },
-        { day: 14, completion: true },
-        { day: 15, completion: true },
-      ],
-      duration: 30,
-      start: 8,
-      progress: 100
-    },
-    {
-      taskName: "Walking",
-      description: "A short description",
-      category: 2,
-      completions: [
-        { day: 13, completion: false },
-        { day: 14, completion: true },
-        { day: 15, completion: false },
-      ],
-      duration: 75,
-      start: 8,
-      progress: 75
-    }
-  ]
-
+const DailyRoutine = ({tasks}) => {
 
   return (
     <div className="card">
@@ -62,7 +32,7 @@ const DailyRoutine = () => {
 
                 <div className="routine-content-details">
                   <div className="routine-content-details-text">
-                    <h3>{task.taskName}</h3>
+                    <h3>{task.name}</h3>
                     <p>{task.description}</p>
                   </div>
                   

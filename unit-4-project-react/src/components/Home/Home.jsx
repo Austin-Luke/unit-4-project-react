@@ -1,10 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Home.css"
 
 import NextHabit from "../Cards/NextHabit/NextHabit";
 import DailyRoutine from "../Cards/DailyRoutine/DailyRoutine";
 
-const Home = () => {
+const taskSkeleton = {
+  name: "",
+  description: "",
+  category: null,
+  completions: [
+    { day: null, completion: null },
+    { day: null, completion: null },
+    { day: null, completion: null },
+  ],
+  duration: null,
+  start: "",
+  progress: null
+}
+
+const Home = ({tasks}) => {
+
+  const [nextTask, setNextTask] = useState(taskSkeleton)
+
+  useEffect(() => {
+    const defineNextTask = () => {
+      const date = new Date();
+      const timeSummed = (date.getHours()*60*60) + (date.getMinutes()*60) + (date.getSeconds());
+
+      let selectedTask = 0;
+
+      for (let i = 1; i < tasks.length; i++) {
+        const task = tasks[i]
+        const timeArr = task.start.split(":")
+        const secs = parseInt(timeArr[2]);
+        const mins = parseInt(timeArr[1]) * 60;
+        const hours = parseInt(timeArr[0]) * 60 * 60;
+
+        const timePassed = secs+mins+hours;
+        
+        if (timeSummed > timePassed) {
+          selectedTask = i+1
+        }
+      }
+
+
+      setNextTask(tasks[selectedTask])
+    }
+    defineNextTask()
+  }, [tasks])
 
   const date = new Date();
   const month = date.toLocaleDateString('en-US', { month: "short" });
@@ -21,8 +64,8 @@ const Home = () => {
         <p>{`${weekday}, ${day} ${month} ${year} `}</p>
       </header>
 
-      <NextHabit />
-      <DailyRoutine />
+      <NextHabit task={nextTask} />
+      <DailyRoutine tasks={tasks} />
     </>
   )
 }
