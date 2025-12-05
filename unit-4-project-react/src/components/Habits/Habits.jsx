@@ -2,6 +2,7 @@ import { useState } from "react"
 import DailyRoutine from "../Cards/DailyRoutine/DailyRoutine"
 import "./Habits.css"
 import ProgressCard from "../Cards/ProgressCard/ProgressCard"
+import AllHabits from "../Cards/AllHabits/AllHabits"
 
 const Habits = ({ tasks, handleTaskProgressChange }) => {
 
@@ -24,6 +25,7 @@ const Habits = ({ tasks, handleTaskProgressChange }) => {
 
       <ProgressCard taskIndex={selectedTask} tasks={tasks} handleTaskProgressChange={handleTaskProgressChange} />
       <DailyRoutine tasks={tasks} action={handleHabitSelection}/>
+      <AllHabits tasks={tasks} />
     </>
   )
 }
