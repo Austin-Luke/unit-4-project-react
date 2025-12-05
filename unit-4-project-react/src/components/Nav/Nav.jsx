@@ -15,7 +15,7 @@ const Nav = ({ handlePageChange, page}) => {
               <img 
                 src={page == navPage ? `/icons/${navPage}-accent.svg` : `/icons/${navPage}-dark.svg`} /* Based on the current page, set the icon to the page's icon + colorstate */
                 alt={`${navPage} page`} 
-                className="icon icon-nav" 
+                className="icon-nav" 
               />
               <p>{navPage}</p>
             </button>

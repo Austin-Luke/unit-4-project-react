@@ -1,10 +1,91 @@
 import CardHeader from "../../CardHeader/CardHeader"
+import Icon from "../../Icon/Icon"
+
+import "./DailyRoutine.css"
 
 const DailyRoutine = () => {
 
+  const tasks = [
+    {
+      taskName: "Reading",
+      description: "A short description",
+      category: 4,
+      completions: [
+        { day: 13, completion: false },
+        { day: 14, completion: true },
+        { day: 15, completion: true },
+      ],
+      duration: 30,
+      start: 8,
+      progress: 100
+    },
+    {
+      taskName: "Walking",
+      description: "A short description",
+      category: 2,
+      completions: [
+        { day: 13, completion: false },
+        { day: 14, completion: true },
+        { day: 15, completion: false },
+      ],
+      duration: 75,
+      start: 8,
+      progress: 75
+    }
+  ]
+
+
   return (
     <div className="card">
-      <CardHeader icon="daily-routine" text="Daily Routine" color="white" />
+      <CardHeader icon="calendar-dark" text="Daily Routine" color="white" />
+
+      <div className="card-container-routine">
+        <div className="progress-tracker">
+          {
+            tasks.map((task, index) => (
+              <div key={index} className="progress-tracker-grouping">
+                {index < tasks.length - 1 && <div className={task.progress == 100 ? "progress-circle completed-circle" : "progress-circle"}></div>}
+                {index < tasks.length - 1 && <div className="progress-line"></div>}
+              </div>
+            ))
+          }
+          <div className={tasks[tasks.length-1].progress == 100 ? "progress-circle completed-circle" : "progress-circle"}></div>
+        </div>
+
+        <ul>
+          {
+            tasks.map((task, index) => (
+              <li key={index} className="card-routine-content">
+                <div className="daily-routine-icon">
+                  <Icon category={task.category} />
+                </div>
+
+                <div className="routine-content-details">
+                  <div className="routine-content-details-text">
+                    <h3>{task.taskName}</h3>
+                    <p>{task.description}</p>
+                  </div>
+                  
+                  <div className="progress-bar">
+                    {/* Task bar is 2  components, who's widths are inverse of 100% from the other. */}
+                    <div style={{width: `${task.progress}%`}}></div>
+                    <div style={{ width: `${100-task.progress}%` }}></div>
+                  </div>
+                </div>
+
+                <div className="side-timer">
+                  <img src="/icons/clock.svg" alt="Clock icon" className="icon-small"/>
+                  <p className="timer">
+                    { // If there's greater than 60mins, convert mins to hours/mins
+                      task.duration < 60 ? `${task.duration} mins` : `${(task.duration / 60).toFixed(2)} hrs`
+                    }
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   )
 }

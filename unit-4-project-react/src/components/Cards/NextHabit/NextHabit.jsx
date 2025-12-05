@@ -1,6 +1,7 @@
 import "./NextHabit.css"
 
 import CardHeader from "../../CardHeader/CardHeader";
+import Icon from "../../Icon/Icon";
 import { useEffect, useState } from "react";
 
 const NextHabit = () => {
@@ -40,11 +41,7 @@ const NextHabit = () => {
 
       <div className="card-content-habit">
         <div className="icon-block">
-          {task.category == 1 && <img src="/icons/food-dark.svg" alt="" className="icon-red" />}
-          {task.category == 2 && <img src="/icons/fitness-dark.svg" alt="" className="icon-blue" />}
-          {task.category == 3 && <img src="/icons/meditation-dark.svg" alt="" className="icon-purple" />}
-          {task.category == 4 && <img src="/icons/hobby-dark.svg" alt="" className="icon-green" />}
-          {task.category == 5 && <img src="/icons/creative-dark.svg" alt="" className="icon-orange" />}
+          <Icon category={task.category} />
           
           <p className="timer">
             { // If there's greater than 60mins, convert mins to hours/mins
