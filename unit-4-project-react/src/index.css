@@ -83,6 +83,13 @@ input:focus {
 
 .btn {
   padding: .5rem 1rem;
+    border-radius: 3rem;
+  background-color: var(--accent-blue);
+  color: #fff;
+  border: 3px solid var(--accent-blue);
+    transition: .125s;
+    font-size: 1rem;
+    font-weight: 700;
 }
 
 .btn-light {
@@ -93,14 +100,19 @@ input:focus {
   transition: .125s;
   font-size: 1rem;
   font-weight: 700;
+  color: var(--accent-orange);
 }
 
 .btn-light:hover {
   background-color: var(--accent-orange);
+  color: var(--white);
 }
 
 .btn-ghost {}
 
+.full-width {
+  width: 100%;
+}
 
 /* ICON STYLING */
 .icon-red {

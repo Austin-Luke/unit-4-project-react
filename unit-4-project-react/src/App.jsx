@@ -39,11 +39,21 @@ const App = () => {
     setPage(newPage)
   }
 
+  const handleTaskProgressChange = (newProgress, taskIndex) => {
+    const currentTask = tasks[taskIndex]
+    currentTask.progress += newProgress;
+
+    const revisedTasks = tasks
+    revisedTasks[taskIndex].progress = currentTask.progress
+    console.log(revisedTasks[taskIndex].progress)
+    setTasks(revisedTasks)
+  }
+
   return (
     <>
       <main>
         {page == "home" && <Home tasks={tasks} />} {/* Home page when page = home */}
-        {page == "habits" && <Habits tasks={tasks} />} {/* Home page when page = home */}
+        {page == "habits" && <Habits tasks={tasks} handleTaskProgressChange={handleTaskProgressChange} />} {/* Home page when page = home */}
       </main>
       <Nav page={page} handlePageChange={handlePageChange}/>
     </>
