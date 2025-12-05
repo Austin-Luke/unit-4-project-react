@@ -8,19 +8,6 @@ const NextHabit = ({task}) => {
 
   const [lastComplete, setLastComplete] = useState(-1)
 
-  const thisTask = {
-    taskName: "Reading",
-    description: "A short description",
-    category: 4,
-    completions: [
-      { day: 13, completion: false },
-      { day: 14, completion: true },
-      { day: 15, completion: true },
-    ],
-    duration: 75,
-    start: 8,
-  }
-
   useEffect(() => {
     const filterCompletion = () => {
       const completions = structuredClone(task.completions).reverse();
