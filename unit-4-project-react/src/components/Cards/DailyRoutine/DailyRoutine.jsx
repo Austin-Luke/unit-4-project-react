@@ -3,7 +3,7 @@ import Icon from "../../Icon/Icon"
 
 import "./DailyRoutine.css"
 
-const DailyRoutine = ({tasks}) => {
+const DailyRoutine = ({tasks, action}) => {
 
   return (
     <div className="card">
@@ -25,7 +25,7 @@ const DailyRoutine = ({tasks}) => {
         <ul>
           {
             tasks.map((task, index) => (
-              <li key={index} className="card-routine-content">
+              <li key={index} className="card-routine-content" onClick={action ? () => {action(index)} : () => {}}>
                 <div className="daily-routine-icon">
                   <Icon category={task.category} />
                 </div>
