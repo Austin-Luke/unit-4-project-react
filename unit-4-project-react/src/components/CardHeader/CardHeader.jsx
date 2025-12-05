@@ -10,7 +10,7 @@ const CardHeader = ({icon, text, color}) => {
 
   return (
     <div className="card-header">
-      <img src={`/icons/${icon}.svg`} alt="" className="icon icon-card-header" />
+      <img src={`/icons/${icon}.svg`} alt="" className="icon-card-header" />
       <h5 className={color == "white" ? "light" : "dark"}>{text}</h5>
     </div>
   )
