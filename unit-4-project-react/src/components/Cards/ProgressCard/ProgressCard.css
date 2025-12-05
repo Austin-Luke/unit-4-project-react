@@ -1,0 +1,26 @@
+.time-counter {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.time-counter p {
+  font-size: .85rem;
+  font-weight: 300;
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.progress-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+.progress-card-details h2 {
+  font-size: 2.25rem;
+  font-weight: 800;
+}

@@ -1,5 +1,6 @@
 import CardHeader from "../../CardHeader/CardHeader"
 import Icon from "../../Icon/Icon"
+import ProgressBar from "../../ProgressBar/ProgressBar"
 
 import "./DailyRoutine.css"
 
@@ -35,12 +36,8 @@ const DailyRoutine = ({tasks, action}) => {
                     <h3>{task.name}</h3>
                     <p>{task.description}</p>
                   </div>
-                  
-                  <div className="progress-bar">
-                    {/* Task bar is 2  components, who's widths are inverse of 100% from the other. */}
-                    <div style={{width: `${task.progress}%`}}></div>
-                    <div style={{ width: `${100-task.progress}%` }}></div>
-                  </div>
+
+                  <ProgressBar progress={task.progress}/>
                 </div>
 
                 <div className="side-timer">

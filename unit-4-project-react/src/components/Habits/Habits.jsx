@@ -1,10 +1,11 @@
 import { useState } from "react"
 import DailyRoutine from "../Cards/DailyRoutine/DailyRoutine"
 import "./Habits.css"
+import ProgressCard from "../Cards/ProgressCard/ProgressCard"
 
-const Habits = ({tasks}) => {
+const Habits = ({ tasks, handleTaskProgressChange }) => {
 
-  const [selectedTask, setSelectedTask] = useState(null)
+  const [selectedTask, setSelectedTask] = useState(0)
 
   const handleHabitSelection = (taskIndex) => {
     console.log(`Setting Selected Task to: ${taskIndex} `, tasks[taskIndex])
@@ -20,6 +21,8 @@ const Habits = ({tasks}) => {
         <p>Manage your habits, and review your stats!</p>
       </header>
 
+
+      <ProgressCard taskIndex={selectedTask} tasks={tasks} handleTaskProgressChange={handleTaskProgressChange} />
       <DailyRoutine tasks={tasks} action={handleHabitSelection}/>
     </>
   )

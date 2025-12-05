@@ -39,7 +39,9 @@ const Home = ({tasks}) => {
         const timePassed = secs+mins+hours;
         
         if (timeSummed > timePassed) {
-          selectedTask = i+1
+          if (i+1 < tasks.length) {
+            selectedTask = i+1
+          }
         }
       }
 
