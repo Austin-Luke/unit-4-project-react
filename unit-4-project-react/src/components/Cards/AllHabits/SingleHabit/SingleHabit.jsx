@@ -3,13 +3,8 @@ import Icon from "../../../Icon/Icon"
 
 const schedule = ["S","M","T","W","T","F","S"]
 
-const SingleHabit = ({task}) => {
+const SingleHabit = ({ task, handleEditHabit }) => {
   const [expanded, setExpanded] = useState(false)
-
-
-  const handleEditClick = () => {
-    console.log(task)
-  }
 
   const handleCardExpand = () => {
     setExpanded(!expanded)
@@ -40,7 +35,7 @@ const SingleHabit = ({task}) => {
               ))}
             </ul>
           </div>
-          <button onClick={() => { handleEditClick() }}>Edit Habit</button>
+          <button onClick={() => { handleEditHabit({task}) }}>Edit Habit</button>
         </div>
       }
 
