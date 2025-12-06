@@ -4,7 +4,7 @@ const Nav = ({ handlePageChange, page}) => {
 
   // Array containing all the pages availble for navigation.
   // If we want to add pages, simply add a new element to the array, and it will all work seemlessly!
-  const pages = ["calendar", "home", "habits", "new"]
+  const pages = ["calendar", "home", "habits"]
 
   return (
     <nav>
@@ -20,7 +20,35 @@ const Nav = ({ handlePageChange, page}) => {
               <p>{navPage}</p>
             </button>
           </li>
+          
         ))}
+
+        {page == "new" &&
+          <li className="active">
+            <button className="nav-link">
+              <img
+                src={`/icons/new-accent.svg`}
+                alt={`New page`}
+                className="icon-nav"
+              />
+              <p>New</p>
+            </button>
+          </li>
+        }
+
+
+        {page == "edit" &&
+          <li className="active">
+            <button className="nav-link">
+              <img
+                src={`/icons/edit-accent.svg`}
+                alt={`Edit page`}
+                className="icon-nav"
+              />
+              <p>Edit</p>
+            </button>
+          </li>
+        }
       </ul>
       
     </nav>

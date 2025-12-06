@@ -23,9 +23,10 @@ const taskSkeleton = {
 
 const App = () => {
   
-  const [page, setPage] = useState("home") // Core Page
+  const [page, setPage] = useState("habits") // Core Page
   const [tasks, setTasks] = useState([taskSkeleton]) // All tasks that have been fetched
   const [todaysTasks, setTodaysTasks] = useState([taskSkeleton]) // All of today's tasks, ordered.
+  const [editHabit, setEditHabit] = useState(taskSkeleton)
 
   // Init fetch and cleanup of data.
   useEffect(() => {
@@ -44,15 +45,11 @@ const App = () => {
         }
       })
 
-      
-
       // Comes in as a "12:34:56"
       // Since today's tasks are used in an ordered list, let's order them!
       // Sort the array of today's tasks. To sort, convert to int, by removing ":"
       tasksToday.sort((a, b) => parseInt((a.start).replaceAll(":", "")) - parseInt((b.start).replaceAll(":", "")))
       setTodaysTasks(tasksToday)
-      console.log(fetchedTasks)
-      console.log(tasksToday)
     }
     loadHabits()
   }, [])
@@ -72,12 +69,32 @@ const App = () => {
     setTodaysTasks(revisedTasks)  // Sets the task list
   }
 
+  const handleEditPage = (task) => {
+    setEditHabit(task)
+    setPage("edit")
+    console.log("Edit: ", task)
+  }
+
   return (
     <>
       <main>
-        {page == "home" && <Home tasks={tasks} todaysTasks={todaysTasks} />} {/* Home page when page = home */}
-        {page == "habits" && <Habits tasks={tasks} todaysTasks={todaysTasks} handleTaskProgressChange={handleTaskProgressChange} />} {/* Home page when page = home */}
-        {page == "new" && <></>}
+        {page == "home" && // Home page when page = home
+          <Home tasks={tasks} todaysTasks={todaysTasks} />
+        } 
+        {page == "habits" && //Task page when page = task
+          <Habits 
+            tasks={tasks} 
+            todaysTasks={todaysTasks} 
+            handleTaskProgressChange={handleTaskProgressChange} 
+            handlePageChange={handlePageChange} 
+            handleEditPage={handleEditPage} />
+        }
+        {page == "new" && // New Habit page when page = new
+          <></>
+        }
+        {page == "edit" && // Edit Habit page when page = edit
+          <></>
+        }
       </main>
       <Nav page={page} handlePageChange={handlePageChange}/>
     </>

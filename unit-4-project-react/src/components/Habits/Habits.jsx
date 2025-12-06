@@ -5,7 +5,7 @@ import ProgressCard from "../Cards/ProgressCard/ProgressCard"
 import AllHabits from "../Cards/AllHabits/AllHabits"
 import NewCard from "../Cards/NewCard/NewCard"
 
-const Habits = ({ tasks, todaysTasks, handleTaskProgressChange }) => {
+const Habits = ({ tasks, todaysTasks, handleTaskProgressChange, handlePageChange, handleEditPage }) => {
 
   const [selectedTask, setSelectedTask] = useState(0)
 
@@ -13,19 +13,6 @@ const Habits = ({ tasks, todaysTasks, handleTaskProgressChange }) => {
     console.log(`Setting Selected Task to: ${taskIndex} `, todaysTasks[taskIndex])
     setSelectedTask(taskIndex)
   }
-
-
-  
-  const handleEditHabit = (task) => {
-    console.log(task)
-  }
-
-  const handleNewHabit = () => {
-    console.log("New Habit")
-  }
-
-
-
 
   return (
     <>
@@ -37,8 +24,8 @@ const Habits = ({ tasks, todaysTasks, handleTaskProgressChange }) => {
 
       <ProgressCard taskIndex={selectedTask} tasks={todaysTasks} handleTaskProgressChange={handleTaskProgressChange} />
       <DailyRoutine taskList={todaysTasks} action={handleHabitSelection}/>
-      <NewCard handleNewHabit={handleNewHabit} />
-      <AllHabits tasks={tasks} handleEditHabit={handleEditHabit} />
+      <NewCard handlePageChange={handlePageChange} />
+      <AllHabits tasks={tasks} handleEditPage={handleEditPage} />
     </>
   )
 }
