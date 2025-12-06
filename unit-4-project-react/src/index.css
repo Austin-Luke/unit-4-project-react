@@ -7,6 +7,7 @@
   --white: #fff;
 
   --accent-blue: #0084FF;
+  --accent-blue-dark: #006ace;
   --accent-orange: #FF6A20;
   --accent-blue-gradient: linear-gradient(100deg, #3496FF, #2078D6);
   --accent-orange-gradient: linear-gradient(100deg, #FAF0DE, #DEC29F);
@@ -108,7 +109,21 @@ input:focus {
   color: var(--white);
 }
 
-.btn-ghost {}
+.btn-ghost {
+  background-color: #fff;
+  border: 2px solid var(--accent-blue);
+  padding: .75rem;
+  border-radius: .5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent-blue-dark);
+  transition: .125s;
+}
+
+.btn-ghost:hover {
+  background-color: var(--accent-blue);
+  color: var(--white);
+}
 
 .full-width {
   width: 100%;
