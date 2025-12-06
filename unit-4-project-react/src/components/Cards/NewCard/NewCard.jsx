@@ -1,10 +1,10 @@
 import "./NewCard.css"
 
-const NewCard = ({ handleNewHabit }) => {
+const NewCard = ({ handlePageChange }) => {
 
   return (
     <div className="card">
-      <button onClick={() => {handleNewHabit()}} className="btn-ghost">
+      <button onClick={() => { handlePageChange("new")}} className="btn-ghost">
         Create a New Habit
       </button>
     </div>
