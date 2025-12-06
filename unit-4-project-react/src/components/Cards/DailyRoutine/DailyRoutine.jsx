@@ -1,10 +1,19 @@
+import { useEffect, useState } from "react"
 import CardHeader from "../../CardHeader/CardHeader"
 import Icon from "../../Icon/Icon"
 import ProgressBar from "../../ProgressBar/ProgressBar"
 
 import "./DailyRoutine.css"
 
-const DailyRoutine = ({tasks, action}) => {
+const DailyRoutine = ({taskList, action}) => {
+  const [tasks, setTasks] = useState(taskList)
+
+  useEffect(() => {
+    const setTaskList = () => {
+      setTasks(taskList)
+    }
+    setTaskList();
+  }, [taskList])
 
   return (
     <div className="card">
@@ -15,7 +24,7 @@ const DailyRoutine = ({tasks, action}) => {
           {
             tasks.map((task, index) => (
               <div key={index} className="progress-tracker-grouping">
-                {index < tasks.length - 1 && <div className={task.progress == 100 ? "progress-circle completed-circle" : "progress-circle"}></div>}
+                {index < tasks.length - 1 && <div className={task.progress >= 100 ? "progress-circle completed-circle" : "progress-circle"}></div>}
                 {index < tasks.length - 1 && <div className="progress-line"></div>}
               </div>
             ))

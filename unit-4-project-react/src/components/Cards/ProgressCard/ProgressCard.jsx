@@ -21,6 +21,7 @@ const ProgressCard = ({ taskIndex, tasks, handleTaskProgressChange }) => {
   useEffect(() => {
     const changeTask = () => {
       const progress = task.progress
+      console.log(progress)
       console.log(parseInt((progress/100) * task.duration)*60)
       setActionState(false)
       setTotalTimeElapsed(parseInt((progress / 100) * task.duration) * 60)
