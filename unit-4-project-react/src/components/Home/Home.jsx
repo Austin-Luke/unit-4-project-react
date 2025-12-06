@@ -18,7 +18,7 @@ const taskSkeleton = {
   progress: null
 }
 
-const Home = ({tasks}) => {
+const Home = ({tasks, todaysTasks}) => {
 
   const [nextTask, setNextTask] = useState(taskSkeleton)
 
@@ -29,8 +29,8 @@ const Home = ({tasks}) => {
 
       let selectedTask = 0;
 
-      for (let i = 1; i < tasks.length; i++) {
-        const task = tasks[i]
+      for (let i = 1; i < todaysTasks.length; i++) {
+        const task = todaysTasks[i]
         const timeArr = task.start.split(":")
         const secs = parseInt(timeArr[2]);
         const mins = parseInt(timeArr[1]) * 60;
@@ -39,17 +39,16 @@ const Home = ({tasks}) => {
         const timePassed = secs+mins+hours;
         
         if (timeSummed > timePassed) {
-          if (i+1 < tasks.length) {
+          if (i + 1 < todaysTasks.length) {
             selectedTask = i+1
           }
         }
       }
 
-
-      setNextTask(tasks[selectedTask])
+      setNextTask(todaysTasks[selectedTask])
     }
     defineNextTask()
-  }, [tasks])
+  }, [todaysTasks])
 
   const date = new Date();
   const month = date.toLocaleDateString('en-US', { month: "short" });
@@ -67,7 +66,7 @@ const Home = ({tasks}) => {
       </header>
 
       <NextHabit task={nextTask} />
-      <DailyRoutine tasks={tasks} />
+      <DailyRoutine taskList={todaysTasks} />
     </>
   )
 }

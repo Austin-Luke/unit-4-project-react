@@ -10,6 +10,7 @@ const NextHabit = ({task}) => {
 
   useEffect(() => {
     const filterCompletion = () => {
+      console.log(structuredClone(task.completions))
       const completions = structuredClone(task.completions).reverse();
       for (let i = 1; i < task.completions.length+1; i++) {
         if (completions[i-1].completion) {

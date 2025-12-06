@@ -6,30 +6,53 @@ import Home from "./components/Home/Home";
 import * as HabitService from "./services/HabitService"
 import Habits from "./components/Habits/Habits";
 
-
+// Template to be used for having a default task structure to prevent errors.
 const taskSkeleton = {
   name: "",
   description: "",
   category: null,
+  days: [true, true, true, true, true, true, true],
   completions: [
-    { day: null, completion: null },
-    { day: null, completion: null },
-    { day: null, completion: null },
+    { day: null, completion: null }
   ],
   duration: null,
   start: "",
   progress: null
 }
 
+
 const App = () => {
   
   const [page, setPage] = useState("home") // Core Page
-  const [tasks, setTasks] = useState([taskSkeleton])
+  const [tasks, setTasks] = useState([taskSkeleton]) // All tasks that have been fetched
+  const [todaysTasks, setTodaysTasks] = useState([taskSkeleton]) // All of today's tasks, ordered.
 
+  // Init fetch and cleanup of data.
   useEffect(() => {
     const loadHabits = async () => {
+      // Service function to fetch data
       const fetchedTasks = await HabitService.read();
       setTasks(fetchedTasks)
+
+      // New ordered list of TODAY's tasks only.
+      const today = new Date() // Today's date
+      const tasksToday = []
+
+      fetchedTasks.forEach((task, index) => {
+        if (task.days[today.getDay()]) { // If the day[#] = true
+          tasksToday.push(task)          // Add the task to the array
+        }
+      })
+
+      
+
+      // Comes in as a "12:34:56"
+      // Since today's tasks are used in an ordered list, let's order them!
+      // Sort the array of today's tasks. To sort, convert to int, by removing ":"
+      tasksToday.sort((a, b) => parseInt((a.start).replaceAll(":", "")) - parseInt((b.start).replaceAll(":", "")))
+      setTodaysTasks(tasksToday)
+      console.log(fetchedTasks)
+      console.log(tasksToday)
     }
     loadHabits()
   }, [])
@@ -39,21 +62,22 @@ const App = () => {
     setPage(newPage)
   }
 
+  // Function to handle a change in task progress.
   const handleTaskProgressChange = (newProgress, taskIndex) => {
-    const currentTask = tasks[taskIndex]
-    currentTask.progress += newProgress;
+    const currentTask = todaysTasks[taskIndex] // Grab the task in question
+    currentTask.progress += newProgress; // Increment the percentage by the change
 
-    const revisedTasks = tasks
-    revisedTasks[taskIndex].progress = currentTask.progress
-    console.log(revisedTasks[taskIndex].progress)
-    setTasks(revisedTasks)
+    const revisedTasks = todaysTasks; // Whole list
+    revisedTasks[taskIndex].progress = currentTask.progress // Set the incremented percentage
+    setTodaysTasks(revisedTasks)  // Sets the task list
   }
 
   return (
     <>
       <main>
-        {page == "home" && <Home tasks={tasks} />} {/* Home page when page = home */}
-        {page == "habits" && <Habits tasks={tasks} handleTaskProgressChange={handleTaskProgressChange} />} {/* Home page when page = home */}
+        {page == "home" && <Home tasks={tasks} todaysTasks={todaysTasks} />} {/* Home page when page = home */}
+        {page == "habits" && <Habits tasks={tasks} todaysTasks={todaysTasks} handleTaskProgressChange={handleTaskProgressChange} />} {/* Home page when page = home */}
+        {page == "new" && <></>}
       </main>
       <Nav page={page} handlePageChange={handlePageChange}/>
     </>

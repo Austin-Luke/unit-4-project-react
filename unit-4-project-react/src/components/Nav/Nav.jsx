@@ -4,7 +4,7 @@ const Nav = ({ handlePageChange, page}) => {
 
   // Array containing all the pages availble for navigation.
   // If we want to add pages, simply add a new element to the array, and it will all work seemlessly!
-  const pages = ["calendar", "home", "habits"]
+  const pages = ["calendar", "home", "habits", "new"]
 
   return (
     <nav>
