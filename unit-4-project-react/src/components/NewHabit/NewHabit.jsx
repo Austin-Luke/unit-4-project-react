@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "./NewHabit.css"
 
 const categories = [`food`, `fitness`, `meditation`, `hobby`, `creative`]
-const days = [`S`, `M`, `T`, `W`, `T`, `F`, `S`]
+const days = [`Su`, `Mo`, `Tu`, `We`, `Th`, `Fr`, `Sa`]
 // defining these variables globally for simplicity's sake
 
 const NewHabit = () => {
@@ -13,7 +13,7 @@ const NewHabit = () => {
         description: "",
         // simple strings
 
-        category: 0,
+        category: 1,
         // defines type of category using integers
 
         days: [false, false, false, false, false, false, false],
@@ -91,90 +91,105 @@ const NewHabit = () => {
             <header>
                 <h1>New Habit</h1>
                 <p>All good habits start with a plan!</p>
-
             </header>
-            <form onSubmit={handleFormSubmit}>
 
+            <img src="/illustrations/form.svg" alt="" className="form-img" />
+
+            <form onSubmit={handleFormSubmit}>
                 {/* category input */}
                 <fieldset>
-                    <legend>Select a category:</legend>
-                    {categories.map((category, index) => (
+                    <legend>Select a Category</legend>
+                    <div className="category-list">
+                        {categories.map((category, index) => (
+                            <div key={index}>
+                                <input
+                                    type="radio"
+                                    name="category"
+                                    // simple strings
 
-                        <div key={index}>
-                            <input
-                                type="radio"
-                                name="category"
-                                // simple strings
+                                    id={category}
+                                    value={index + 1}
+                                    // refers to the index of the categories array
 
-                                value={index + 1}
-                                // refers to the index of the categories array
+                                    checked={index + 1 == inputs.category}
+                                    // is this specific radio button on or off?
+                                    // checks the state of the radio boolean
 
-                                checked={index + 1 == inputs.category}
-                                // is this specific radio button on or off?
-                                // checks the state of the radio boolean
+                                    onChange={handleInputChange}
+                                    // action on change
 
-                                onChange={handleInputChange}
-                            // action on change
-
-                            />
-                            <label htmlFor="category">
-                                <img src={`/icons/${category}-dark.svg`} alt="" />
-                            </label>
-                            <label htmlFor="category">{category}</label>
-                        </div>
-                    ))}
+                                    required
+                                />
+                                <label htmlFor={category}>
+                                    <img src={`/icons/${category}-dark.svg`} alt="" />
+                                    {category}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                    
                 </fieldset>
 
 
                 {/* name input */}
-                <label htmlFor="name">Name your habit:</label>
-                <input type="text" name="name" value={inputs.name} onChange={handleInputChange} />
+                <div className="input-collection">
+                    <label htmlFor="name">Name your Habit</label>
+                    <input type="text" name="name" value={inputs.name} onChange={handleInputChange} placeholder="Go for a walk" required />
+                </div>
 
                 {/* description input */}
-                <label htmlFor="description">Describe your task:</label>
-                <textarea name="description" value={inputs.description} onChange={handleInputChange}></textarea>
-
+                <div className="input-collection">
+                    <label htmlFor="description">Describe your Task</label>
+                    <textarea name="description" value={inputs.description} onChange={handleInputChange} placeholder="A little bit of motion never hurt anyone!" required ></textarea>
+                </div>
+                
                 {/* days input */}
                 <fieldset>
-                    <legend>Repeat days:</legend>
-                    {days.map((day, index) => (
-
-                        <div key={index}>
-                            <input
-                                type="checkbox"
-                                name="day"
-                                value={index}
-                                checked={inputs.days[index]}
-                                onChange={handleInputChange}
-                            />
-                            <label htmlFor={day}>{day}</label>
-                        </div>
-
-                    ))}
+                    <legend>Repeat Days</legend>
+                    <div className="days-list">
+                        {days.map((day, index) => (
+                            <div key={index}>
+                                <input
+                                    type="checkbox"
+                                    id={day}
+                                    name="day"
+                                    value={index}
+                                    checked={inputs.days[index]}
+                                    onChange={handleInputChange}
+                                />
+                                <label htmlFor={day}>{day[0]}</label>
+                            </div>
+                        ))}
+                    </div>
                 </fieldset>
 
                 {/* duration input */}
-                <label htmlFor="duration">Activity duration:</label>
-                <select name="duration" value={inputs.duration} onChange={handleInputChange}>
+                <div className="input-collection">
+                    <label htmlFor="duration">Activity Duration</label>
+                    <select name="duration" value={inputs.duration} onChange={handleInputChange}>
 
-                    {durations.map((duration, index) => (
-                        <option value={duration} key={index}>
-                            {duration < 60 ? `${duration} mins` : `${duration / 60} hrs`}
-                        </option>
-                        // an option will be created for every iteration of the above for-loop
-                        // << this is JavaScript
-                    ))}
-                    {/* .map returns whatever code is written inside it */}
-                    {/* << this is HTML */}
+                        {durations.map((duration, index) => (
+                            <option value={duration} key={index}>
+                                {duration < 60 ? `${duration} mins` : `${duration / 60} hrs`}
+                            </option>
+                            // an option will be created for every iteration of the above for-loop
+                            // << this is JavaScript
+                        ))}
+                        {/* .map returns whatever code is written inside it */}
+                        {/* << this is HTML */}
 
-                </select>
+                    </select>
+                </div>
+                
 
                 {/* time input */}
-                <label htmlFor="start">Start time:</label>
-                <input type="time" name="start" value={inputs.start} onChange={handleInputChange} />
-
+                <div className="input-collection">
+                    <label htmlFor="start">Start Time</label>
+                    <input type="time" name="start" value={inputs.start} onChange={handleInputChange} />
+                </div>
+                
                 {/* submit new task button */}
-                <button type="submit">Create habit</button>
+                <button type="submit" className="btn">Create Habit</button>
             </form>
         </>
     )

@@ -92,7 +92,7 @@ form .days-list {
   gap: 1rem;
 }
 
-form .days-list div {
+form .days-list div label {
   width: fit-content;
   border: 2px solid var(--black);
   display: flex;
@@ -104,7 +104,7 @@ form .days-list div {
   color: var(--black)
 }
 
-form .days-list div:has( input:checked) {
+form .days-list div:has( input:checked) label {
   background-color: var(--black);
   color: #fff;
 }
