@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css"
 import Nav from "./components/Nav/Nav";
 import Home from "./components/Home/Home";
+import NewHabit from "./components/NewHabit/NewHabit";
 
 import * as HabitService from "./services/HabitService"
 import Habits from "./components/Habits/Habits";
@@ -77,7 +78,7 @@ const App = () => {
       <main>
         {page == "home" && <Home tasks={tasks} todaysTasks={todaysTasks} />} {/* Home page when page = home */}
         {page == "habits" && <Habits tasks={tasks} todaysTasks={todaysTasks} handleTaskProgressChange={handleTaskProgressChange} />} {/* Home page when page = home */}
-        {page == "new" && <></>}
+        {page == "new" && <NewHabit/>}
       </main>
       <Nav page={page} handlePageChange={handlePageChange}/>
     </>
