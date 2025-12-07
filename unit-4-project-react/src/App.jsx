@@ -36,16 +36,12 @@ const App = () => {
       // Service function to fetch data
       const fetchedTasks = await HabitService.read();
       setTasks(fetchedTasks)
-    }
-    loadHabits()
-  }, [])
 
-  useEffect(() => {
-    const updatingTodaysTasks = () => {
+      // New ordered list of TODAY's tasks only.
       const today = new Date() // Today's date
       const tasksToday = []
 
-      tasks.forEach((task, index) => {
+      fetchedTasks.forEach((task, index) => {
         if (task.days[today.getDay()]) { // If the day[#] = true
           tasksToday.push(task)          // Add the task to the array
         }
@@ -57,8 +53,8 @@ const App = () => {
       tasksToday.sort((a, b) => parseInt((a.start).replaceAll(":", "")) - parseInt((b.start).replaceAll(":", "")))
       setTodaysTasks(tasksToday)
     }
-    updatingTodaysTasks()
-  }, [tasks])
+    loadHabits()
+  }, [])
 
   // Change Core Page on Nav Click
   const handlePageChange = (newPage) => {
@@ -75,34 +71,10 @@ const App = () => {
     setTodaysTasks(revisedTasks)  // Sets the task list
   }
 
-
-  // Toggle page change when 'edit' button clicked
-  const handleEditPage = async (task) => {
+  const handleEditPage = (task) => {
     setEditHabit(task)
     setPage("edit")
     console.log("Edit: ", task)
-  }
-
-
-  // CRUD Functionality
-  const handleCreateHabit = async (task) => {
-    const createdTask = await HabitService.create(task)
-    setTasks([...tasks, createdTask])
-    setPage("home")
-  }
-
-  const handleEditHabit = async (task) => {
-    const editedTask = await HabitService.edit(task)
-    const revisedTasks = await HabitService.read()
-    setTasks(revisedTasks)
-    setPage("home")
-  }
-
-  const handleDeleteHabit = async (task) => {
-    const deletedTask = await HabitService.del(task)
-    const revisedTasks = await HabitService.read()
-    setTasks(revisedTasks)
-    setPage("home")
   }
 
   return (
@@ -120,19 +92,14 @@ const App = () => {
             handleEditPage={handleEditPage} />
         }
         {page == "new" &&  //New Habit page when page = new
-          <NewHabit 
-            handleCreateHabit={handleCreateHabit}
-        />}
+          <NewHabit />}
         
         {page == "edit" && // Edit Habit page when page = edit
           <Edit 
-            task={editHabit} 
-            handleDeleteHabit={handleDeleteHabit}
-            handleEditHabit={handleEditHabit}
-          />
+            task={editHabit} />
         }
       </main>
-      <Nav page={page} handlePageChange={handlePageChange} />
+      <Nav page={page} handlePageChange={handlePageChange}/>
     </>
   )
 }
