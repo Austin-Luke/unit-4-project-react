@@ -25,7 +25,7 @@ const taskSkeleton = {
 
 const App = () => {
   
-  const [page, setPage] = useState("habits") // Core Page
+  const [page, setPage] = useState("home") // Core Page
   const [tasks, setTasks] = useState([taskSkeleton]) // All tasks that have been fetched
   const [todaysTasks, setTodaysTasks] = useState([taskSkeleton]) // All of today's tasks, ordered.
   const [editHabit, setEditHabit] = useState(taskSkeleton)
@@ -36,12 +36,16 @@ const App = () => {
       // Service function to fetch data
       const fetchedTasks = await HabitService.read();
       setTasks(fetchedTasks)
+    }
+    loadHabits()
+  }, [])
 
-      // New ordered list of TODAY's tasks only.
+  useEffect(() => {
+    const updatingTodaysTasks = () => {
       const today = new Date() // Today's date
       const tasksToday = []
 
-      fetchedTasks.forEach((task, index) => {
+      tasks.forEach((task, index) => {
         if (task.days[today.getDay()]) { // If the day[#] = true
           tasksToday.push(task)          // Add the task to the array
         }
@@ -53,8 +57,8 @@ const App = () => {
       tasksToday.sort((a, b) => parseInt((a.start).replaceAll(":", "")) - parseInt((b.start).replaceAll(":", "")))
       setTodaysTasks(tasksToday)
     }
-    loadHabits()
-  }, [])
+    updatingTodaysTasks()
+  }, [tasks])
 
   // Change Core Page on Nav Click
   const handlePageChange = (newPage) => {
@@ -71,10 +75,34 @@ const App = () => {
     setTodaysTasks(revisedTasks)  // Sets the task list
   }
 
-  const handleEditPage = (task) => {
+
+  // Toggle page change when 'edit' button clicked
+  const handleEditPage = async (task) => {
     setEditHabit(task)
     setPage("edit")
     console.log("Edit: ", task)
+  }
+
+
+  // CRUD Functionality
+  const handleCreateHabit = async (task) => {
+    const createdTask = await HabitService.create(task)
+    setTasks([...tasks, createdTask])
+    setPage("home")
+  }
+
+  const handleEditHabit = async (task) => {
+    const editedTask = await HabitService.edit(task)
+    const revisedTasks = await HabitService.read()
+    setTasks(revisedTasks)
+    setPage("home")
+  }
+
+  const handleDeleteHabit = async (task) => {
+    const deletedTask = await HabitService.del(task)
+    const revisedTasks = await HabitService.read()
+    setTasks(revisedTasks)
+    setPage("home")
   }
 
   return (
@@ -92,14 +120,19 @@ const App = () => {
             handleEditPage={handleEditPage} />
         }
         {page == "new" &&  //New Habit page when page = new
-          <NewHabit />}
+          <NewHabit 
+            handleCreateHabit={handleCreateHabit}
+        />}
         
         {page == "edit" && // Edit Habit page when page = edit
           <Edit 
-            task={editHabit} />
+            task={editHabit} 
+            handleDeleteHabit={handleDeleteHabit}
+            handleEditHabit={handleEditHabit}
+          />
         }
       </main>
-      <Nav page={page} handlePageChange={handlePageChange}/>
+      <Nav page={page} handlePageChange={handlePageChange} />
     </>
   )
 }
