@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css"
 import Nav from "./components/Nav/Nav";
 import Home from "./components/Home/Home";
+import Edit from "./components/Edit/Edit"
 
 import * as HabitService from "./services/HabitService"
 import Habits from "./components/Habits/Habits";
@@ -93,7 +94,8 @@ const App = () => {
           <></>
         }
         {page == "edit" && // Edit Habit page when page = edit
-          <></>
+          <Edit 
+            task={editHabit} />
         }
       </main>
       <Nav page={page} handlePageChange={handlePageChange}/>

@@ -53,6 +53,7 @@ li,
 button,
 a,
 input,
+textarea,
 span {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
@@ -62,12 +63,20 @@ span {
   outline: none;
 }
 
-input {
+input, 
+textarea,
+select {
   background-color: #fff;
   box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, .0775);
+  padding: .65rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
 }
 
-input:focus {
+input:focus ,
+textarea:focus,
+select:focus {
   outline: 1.5px solid #ccd1d4;
 }
 
