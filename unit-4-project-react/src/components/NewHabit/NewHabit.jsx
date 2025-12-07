@@ -5,7 +5,7 @@ const categories = [`food`, `fitness`, `meditation`, `hobby`, `creative`]
 const days = [`Su`, `Mo`, `Tu`, `We`, `Th`, `Fr`, `Sa`]
 // defining these variables globally for simplicity's sake
 
-const NewHabit = () => {
+const NewHabit = ({ handleCreateHabit }) => {
 
     const [inputs, setInputs] = useState({
 
@@ -81,8 +81,7 @@ const NewHabit = () => {
 
         event.preventDefault()
         // prevent default functionality of a form (redirection of the page)
-
-        console.log(inputs)
+        handleCreateHabit(inputs)
     }
 
 

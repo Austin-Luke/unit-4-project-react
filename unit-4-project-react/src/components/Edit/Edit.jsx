@@ -4,7 +4,7 @@ import "./Edit.css"
 const categories = ["food", "fitness", "meditation", "hobby", "creative"]
 const days = ["Su","Mo","Tu","We","Th","Fr","Sa"]
 
-const Edit = ({task}) => {
+const Edit = ({ task, handleDeleteHabit, handleEditHabit }) => {
   
   const [inputs, setInputs] = useState(task)
   const [durations, setDurations] = useState([])
@@ -45,11 +45,7 @@ const Edit = ({task}) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting: ", inputs)
-  }
-
-  const handleDeleteHabit = () => {
-    console.log("delete task")
+    handleEditHabit(inputs)
   }
 
   return (
@@ -59,7 +55,7 @@ const Edit = ({task}) => {
           <h1>Edit Your Habit</h1>
           <p>Let's redefine your lifestyle!</p>
         </div>
-        <button onClick={() => { handleDeleteHabit() }}><img src="/icons/trash.svg" alt="" /></button>
+        <button type="button" onClick={() => { handleDeleteHabit(task) }}><img src="/icons/trash.svg" alt="" /></button>
         
       </header>
 
@@ -77,8 +73,8 @@ const Edit = ({task}) => {
                   type="radio"
                   id={category}
                   name="category"
-                  value={index}
-                  checked={index == inputs.category}
+                  value={index + 1}
+                  checked={index + 1 == inputs.category}
                   onChange={handleInputChange}
                 />
                 <label htmlFor={category}>
