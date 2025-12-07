@@ -82,6 +82,11 @@
 .routine-content-details-text p {
   font-size:.85rem;
   color: #64737D;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .icon-small {

@@ -4,7 +4,7 @@ import CardHeader from "../../CardHeader/CardHeader"
 import Icon from "../../Icon/Icon"
 import SingleHabit from "./SingleHabit/SingleHabit"
 
-const AllHabits = ({ tasks, handleEditHabit }) => {
+const AllHabits = ({ tasks, handleEditPage }) => {
 
 
   return (
@@ -14,7 +14,7 @@ const AllHabits = ({ tasks, handleEditHabit }) => {
       <ul className="all-habits-container">
         {
           tasks.map((task, index) => (
-            <SingleHabit key={index} task={task} handleEditHabit={handleEditHabit} />
+            <SingleHabit key={index} task={task} handleEditHabit={() => {handleEditPage(task)}} />
             
           ))
         }
