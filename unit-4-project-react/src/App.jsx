@@ -3,6 +3,7 @@ import "./App.css"
 import Nav from "./components/Nav/Nav";
 import Home from "./components/Home/Home";
 import Edit from "./components/Edit/Edit"
+import NewHabit from "./components/NewHabit/NewHabit";
 
 import * as HabitService from "./services/HabitService"
 import Habits from "./components/Habits/Habits";
@@ -90,9 +91,9 @@ const App = () => {
             handlePageChange={handlePageChange} 
             handleEditPage={handleEditPage} />
         }
-        {page == "new" && // New Habit page when page = new
-          <></>
-        }
+        {page == "new" &&  //New Habit page when page = new
+          <NewHabit />}
+        
         {page == "edit" && // Edit Habit page when page = edit
           <Edit 
             task={editHabit} />
