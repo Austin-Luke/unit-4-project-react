@@ -53,7 +53,7 @@ const DailyRoutine = ({taskList, action}) => {
                   <img src="/icons/clock.svg" alt="Clock icon" className="icon-small"/>
                   <p className="timer">
                     { // If there's greater than 60mins, convert mins to hours/mins
-                      task.duration < 60 ? `${task.duration} mins` : `${(task.duration / 60).toFixed(2)} hrs`
+                      task.duration < 60 ? `${task.duration} mins` : `${(task.duration / 60)} hrs`
                     }
                   </p>
                 </div>
